@@ -9,15 +9,15 @@ public class ConsistenceHash {
     // 物理节点集合
     private List<String> realNodes = new ArrayList<>();
     // 虚拟节点数，用户指定
-    private int viretalNums = 100;
+    private int virtualNodes = 100;
     // 物理节点与虚拟节点的对应关系存储
     private Map<String,List<Integer>> real2VirtualMap = new HashMap<>();
     // 排序存储结构红黑树，key是虚拟节点的hash值，value是物理节点
     private SortedMap<Long,String> sortedMap = new TreeMap<>();
 
-    public ConsistenceHash(int viretalNums) {
+    public ConsistenceHash(int virtualNodes) {
         super();
-        this.viretalNums = viretalNums;
+        this.virtualNodes = virtualNodes;
     }
 
     public ConsistenceHash() {
@@ -31,7 +31,7 @@ public class ConsistenceHash {
     public void addService(String node){
         String vnode = null;
         int i = 0;
-        for (int count=0;count<viretalNums;){
+        for (int count=0;count< virtualNodes;){
             i++;
             vnode = node+"-"+i;
             long hashValue = FnvHash.fnv1a_64(vnode);
